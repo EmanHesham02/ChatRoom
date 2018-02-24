@@ -1,0 +1,64 @@
+div{
+
+    margin-left: 35%;
+    margin-top: 10%;
+}
+table {
+    border: 1px solid #DB7093;
+    text-align: center;
+    background: #ffe6e6;
+
+    color: #2c90c6;
+
+    width: 40%;
+    height:100%;
+
+}
+
+
+th, td {
+
+    border-collapse: collapse;
+    text-align: center;
+ 
+
+}
+
+#headrow1{
+    font-size: 25px;
+    color: 	#0080ff;
+}
+
+body {
+    background:#FFCCCC;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    line-height: 4em;
+}
+
+
+.Registro input{
+    background-color: #2c90c6;
+    border: 1px solid #2c90c6;
+    border-radius: 15px;
+
+    color: #fff;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 150px;
+}
+#btn{
+    background-color: #CC3399;
+    border: 1px solid #2c90c6;
+    border-radius: 15px;
+
+    color: #fff;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 50%;
+}

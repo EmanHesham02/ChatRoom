@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="regstyletest.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="javascript.js"></script>
+    </head>
+    <body>
+        <div class="Registro" >
+            <form> 
+                <table  id="myTable">
+                    <tr>
+                        <th colspan="2" id="headrow1"><ins>Account Information</ins></th>
+                    </tr>
+
+                    <tr>
+                        <td>First Name</td>
+                        <td><input type="text" required tabindex="1" style="width: 80% "  id="fName"> </td>
+                    </tr>
+
+                    <tr>
+                        <td>Last Name</td>
+                        <td><input type="text"   required tabindex="2" style="width: 80%"  id="lName"> </td>
+                    </tr>
+
+                    <tr>
+                        <td>UserName</td>
+                        <td><input type="text" required tabindex="4" style="width: 80% "  id="userName"> </td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="Password" required tabindex="3" style="width: 80% " class="Registro"  id="pass"> </td>
+                    </tr>
+
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="email" tabindex="3" style="width: 80%" id="email"> </td>
+                    </tr>
+                 
+                    <tr>
+                        <th colspan="2"><input id="btn" type="button" value="Regiter" onclick="register()"></th>
+                    </tr>
+
+                </table>
+            </form>
+        </div>
+    </body>
+</html>

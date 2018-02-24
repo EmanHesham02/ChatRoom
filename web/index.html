@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Chat Room</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#sendbtn").click(function () {
+                    var message = $("#message").val();
+                    var jsonData = {"myMessage": message};
+                    $.ajax({url: 'Chatservelt', type: 'Get', contentType: 'application/json',
+                        data: jsonData,
+                        dataType: 'json',
+                        success: function (data) {
+                            alert("data send");
+                            $("#message").val = "";
+                          
+                        }});
+                });
+            });
+        </script>
+        <script>
+            function refresh() {
+                $.ajax({
+                    url: 'Chatservelt',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (val) {
+                        var messages = val;
+//                           $("#name").html(val[0].name);  
+                        $("#tableRows tr").remove();
+                        for (var i = 0; i < val.length; i++) {
+                            $('#tableRows').append('<tr><td>' + messages[i].name + '</td><td>' + messages[i].message + '</td > </tr>');
+                        }
+
+
+                    }
+                });
+            }
+
+
+
+
+
+        </script>
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td,
+            th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+
+    </head>
+    <body   onload="setInterval('refresh()', 2000)">
+
+<!--        <label id="name"></label>-->
+        Message: <input type="text" id="message">
+        <input type="button" value="Send" id="sendbtn" >
+
+
+        <br><br>
+        <div id="secondScreen">
+            <h2 style="text-align: center;">Messages</h2>
+
+            <table id="messagesTable" style="text-align: center;align-content: center">
+                <col width="10%">
+                <col width="90%">
+                <tr>
+                    <th style="text-align: center;">Name</th>
+                    <th style="text-align: center;">Message</th>
+                </tr>
+
+                <tbody id="tableRows">
+                    <tr>
+
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </body>
+</html>
