@@ -36,7 +36,7 @@ public class Chatservelt extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+            response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
         HttpSession session = request.getSession(false);
@@ -44,11 +44,10 @@ public class Chatservelt extends HttpServlet {
             name = (String) session.getAttribute("userName");
             message = request.getParameter("myMessage");
 
-            response.setContentType("application/json");
             MessageDTO messageDTO = new MessageDTO();
             messageDTO.setName(name);
             messageDTO.setMessage(message);
-
+            System.out.println(message);
             vector.add(messageDTO);
         } else {
             out.print("Please login first");

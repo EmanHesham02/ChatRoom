@@ -25,7 +25,7 @@ public class RegServlet extends HttpServlet {
     HttpSession session;
     User user;
     public static ArrayList<User> arrUser = new ArrayList<>();
-    //public static ArrayList<User> onlineUser = new ArrayList<>();
+    public static ArrayList<User> onlineUser = new ArrayList<>();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,7 +70,7 @@ public class RegServlet extends HttpServlet {
         if (flag) {
             HttpSession session = request.getSession(true);
             session.setAttribute("userName", userName);
-            //onlineUser.add(user);
+            onlineUser.add(user);
             session.setMaxInactiveInterval(30); // 30 seconds
             response.sendRedirect("index.html");
 

@@ -9,42 +9,77 @@ and open the template in the editor.
         <title>Chat Room</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="chatstyletest.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
         </script>
         <script type="text/javascript">
-            $(document).ready(function () {
-                $("#sendbtn").click(function () {
-                    var message = $("#message").val();
-                    var jsonData = {"myMessage": message};
-                    $.ajax({url: 'Chatservelt', type: 'Get', contentType: 'application/json',
-                        data: jsonData,
-                        dataType: 'json',
-                        success: function (data) {
-                            alert("data send");
-                            $("#message").val = "";
-                          
-                        }});
+//            $(document).ready(function () {
+            function sendbtn() {
+
+                var message = $("#message").val();
+                var jsonData = {"myMessage": message};
+                $.get("Chatservelt", jsonData, function (data) {
+                    console.log(data.name);
+                    alert("data send");
+                    $("#message").val = "";
+
                 });
-            });
+            }
+//            });
         </script>
         <script>
             function refresh() {
-                $.ajax({
-                    url: 'Chatservelt',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    success: function (val) {
-                        var messages = val;
-//                           $("#name").html(val[0].name);  
-                        $("#tableRows tr").remove();
-                        for (var i = 0; i < val.length; i++) {
-                            $('#tableRows').append('<tr><td>' + messages[i].name + '</td><td>' + messages[i].message + '</td > </tr>');
+                $.post(
+                        'Chatservelt', function (val) {
+                            var messages = val;
+//                           $("#name").html(val[0].name); 
+                            var table = document.getElementById("tableRows");
+
+                            while (table.hasChildNodes()) {
+                                table.removeChild(table.lastChild);
+                            }
+                            for (var i = 0; i < val.length; i++) {
+                                $('#tableRows').append('<tr><td>' + messages[i].name + '</td><td>' + messages[i].message + '</td > </tr>');
+                            }
                         }
+                );
+                $.post('OnlineUser',
+                        function (val) {
+                            var users = val;
+//                        
+                            var table = document.getElementById("onlinetable");
+
+                            while (table.hasChildNodes()) {
+                                table.removeChild(table.lastChild)
+                            }
+
+                            for (var i = 0; i < val.length; i++) {
+                                $('#onlinetable').append('<tr><td>' + users[i].UserName + '</td><td>');
+                            }
 
 
-                    }
-                });
+                        }
+                );
+
+            }
+            function logout() {
+                $.get('OnlineUser',
+                        function (val) {
+                            var users = val;
+                            var table = document.getElementById("onlinetable");
+
+                            while (table.hasChildNodes()) {
+                                table.removeChild(table.lastChild)
+                            }
+
+                            for (var i = 0; i < val.length; i++) {
+                                $('#onlinetable').append('<tr><td>' + users[i].UserName + '</td><td>');
+                            }
+
+
+                        }
+                );
+
             }
 
 
@@ -52,40 +87,19 @@ and open the template in the editor.
 
 
         </script>
-        <style>
-            table {
-                font-family: arial, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-            }
 
-            td,
-            th {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-            }
-
-            tr:nth-child(even) {
-                background-color: #dddddd;
-            }
-        </style>
 
     </head>
     <body   onload="setInterval('refresh()', 2000)">
-
-<!--        <label id="name"></label>-->
-        Message: <input type="text" id="message">
-        <input type="button" value="Send" id="sendbtn" >
-
+        <div id ="fristscreen">
+            <h2 class="headrow1">Type Your Messages</h2>
+            <input type="text" id="message" >
+            <input type="button" value="Send" id="sendbtn"  onClick="sendbtn()">
+        </div>
 
         <br><br>
-        <div id="secondScreen">
-            <h2 style="text-align: center;">Messages</h2>
-
-            <table id="messagesTable" style="text-align: center;align-content: center">
-                <col width="10%">
-                <col width="90%">
+        <div id="secondScreen" >
+            <table id="Table" style="text-align: center;align-content: center">
                 <tr>
                     <th style="text-align: center;">Name</th>
                     <th style="text-align: center;">Message</th>
@@ -100,6 +114,25 @@ and open the template in the editor.
             </table>
 
         </div>
+
+        <div id="theardScreen" >
+            <table id="OnlineTable" style="text-align: center;align-content: center">
+                <tr>
+                    <th style="text-align: center;">Online</th>
+
+                </tr>
+
+                <tbody id="onlinetable">
+                    <tr>
+
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+        <input type="button" value="Logout" id="Logoutbtn"  onClick="logout()">
+
 
     </body>
 </html>
